@@ -1,0 +1,213 @@
+{% extends '_nav_banner_modal.html' %}
+{% load static %}
+{% block css %}
+    <!-- Bootstrap core CSS -->
+    <!-- Custom styles for this template -->
+    <link rel="stylesheet" href="{% static 'css/jquery.uploadfile.css' %}" type="text/css">
+{% endblock css %}
+{% block content %}
+
+<h1 style="white-space:nowrap;color:#0C324C;" class="mt-5">Shared Neoantigen Discovery</h1>
+    
+<script data-turbolinks-track="true" src="../static/js/jquery/jquery-1.11.1.min.js"></script>
+    <script data-turbolinks-track="true" src="../static/js/jquery/bootstrap.min.js"></script>
+    <script data-turbolinks-track="true" src="../static/js/jquery/bootstrap-select.min.js"></script>
+    <script data-turbolinks-track="true" src="../static/js/jquery/jquery-ui-1.10.4.custom.min.js"></script>
+    <script data-turbolinks-track="true" src="../static/js/jquery/jquery.iframe-transport.js"></script>
+    <script data-turbolinks-track="true" src="../static/js/jquery/turbolinks.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+<div class="content col-md-0" id="get-started">  
+</div>
+
+<style type="text/css">
+h4 {
+      text-indent: 25px;
+    }
+.tab { margin-left: 20px; }
+
+/* 輸入框的基本樣式 */
+input[name="sampleNames"] {
+      padding: 8px;
+      border: 1px solid #ccc;
+      border-radius: 3px;
+      font-size: 14px;
+      outline: none;
+      background-color: #f5f5f5;
+      transition: border-color 0.3s, box-shadow 0.3s;
+      margin-bottom: 10px;
+    }
+
+    #sampleNamesContainer {
+  margin-top: 20px;
+}
+
+.sample-input {
+  display: block;
+  margin-top: 10px;
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  font-size: 14px;
+  width: 200px;
+}
+
+.btn-success {
+  background-color: #28a745;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.btn-success:hover {
+  background-color: #218838;
+}
+
+.btn-danger {
+  background-color: #f54848;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.btn-danger:hover {
+  background-color: #f54848;
+}
+
+.btn-submit {
+  background-color: #5a99ff;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.btn-submit:hover {
+  background-color: #5a99ff;
+}
+
+
+</style>
+
+<form action="{% url 'find_overlapped_result' %}" method="POST" target="_blank">
+{% csrf_token %}
+        <div class="card text-dark mb-3" style="background-color: #f4f8ff;">
+            <div class="card-heading">
+                <h3 class="card-header" style="background-color: #d0e0fa;">Basic Information</h3></div>
+            <div class="card-body">
+                <p>please provide your basic information.</p>
+                <div class="form-group">
+                    <label for="email">Email address:</label>
+                    <input type="email" class="form-control" name="email" id="email" required/>
+                </div>
+                <p>Please re-enter your Email for comfirmation.</p>
+                <div class="form-group">
+                    <label for="email">Re-enter Email address:</label>
+                    <input type="email" class="form-control" name="re_enter" id="re_enter" required/>
+                </div>
+            </div>    
+
+        <!-- step1. data upload -->
+        <div class="card text-dark mb-3" style="background-color: #f4f8ff;">
+            <div class="card text-dark mb-3" style="background-color: #f4f8ff;"> <!--quality check-->
+                <div class="card-heading">
+                    <h3 class="card-header" style="background-color: #d0e0fa;">Step 1. Neoantigen Result Files Upload</h3></div>
+                <div class="card-body">  
+                        <div id="tsv_browser_upload">
+                            <p>Please upload at least two output files here. Formats: <b> T_TSA_candidates.tsv </b> or <b>T_TSA_candidates_with_cosmic.tsv </b></p>
+                            <p>Only allow <b>.tsv</b> format. Maximum size for each file: <b>5 MB</b>.</p>
+                            <div id="fileuploader_tsv"></div>
+                            <input type="hidden" id="upload_id" name="upload_id" value=""/>
+                        </div>
+                        <p>Please fill in the sample names according to the order of file uploads. Please note that the number of sample names should be equal to the number of files.</p>
+                        <div id="sampleNamesContainer">
+                            
+                            <div id="addFilesButton" class="btn btn-success btn-lg">
+                            <span> <b>+</b> Add Sample Names</span>
+                            </div>
+                            <div id="removeFilesButton" class="btn btn-danger btn-lg">
+                            <span><b>-</b> Remove Last Sample</span>
+                            </div>
+                          </div>
+                          <p></p>
+                          <div id="upload_button" class="btn btn-submit btn-lg">
+                            <span><b>&uArr;</b> Confirm Samples </span>
+                          </div>
+                          <!-- <input type="hidden" id="sampleNames" name="sampleNames" value=""/> -->
+
+                        </div> 
+                </div>
+            </div>
+            
+            <!-- Step 2. Select HLA types -->
+                <div class="card-heading">
+                    <h3 class="card-header" style="background-color: #d0e0fa;">Step 2. HLA Type Selection</h3></div>
+                <div class="card-body">
+                    <p>Please select one HLA type presented in all samples. Please note that if at least a sample doesn't have this specific HLA type, the report will be marked as a failure.</p>
+                    <p>Maximum number of HLA types: <b>1</b></p>
+                    <div class="selcenter">
+                        <select class="HLA-multiple" id="HLA-multiple" name="HLA-multiple" multiple="multiple">
+                        {% for hla_type in hla_list %}
+                        <option value={{hla_type}}>{{hla_type}}</option>
+                        {% endfor %}
+                    </select>
+                    </div>
+                </div>
+            </div>
+            <!-- Privacy Statement -->
+                <div class="card-heading">
+                    <h3 class="card-header" style="background-color: #d0e0fa;">Step 3. Privacy Statement</h3></div>
+                <div class="card-body">
+                    NARWHAL NEVER shares users' uploaded data and results with others. All data and metadata of one
+                    task will be removed automatically from the server without any copies after <b>7 days</b> of the
+                    report generated.
+                    <p></p>
+                    <input class="form-check-input" type="checkbox" name="accept_privacy_statement"
+                           id="accept_privacy_statement" value="accept"/>
+                    <label class="form-check-label" for="accept_privacy_statement">I have read the Privacy Statement of NARWHAL and accept NARWHAL to process my upload data.</label>
+                </div>
+                <div id="submission_panel">
+                    <div class="card text-dark bg-light mb-3">
+                        <div class="card-heading">
+                            <h3 class="card-header" style="background-color: #d0e0fa;">Step 4. Data submission</h3></div>
+                        <div class="card-body">
+                            <button class="btn btn-default btn-success" type="submit" id="submit">Submit</button>
+                        </div>
+                    </div>
+            </div>
+            
+            
+
+    </div>
+</form>
+{% endblock content %}
+{% block script %}
+<script data-turbolinks-track="true" type="text/javascript"
+        src="{% static '/js/jquery/jquery-1.11.1.min.js' %}"></script>
+<script data-turbolinks-track="true" type="text/javascript" src="{% static '/js/jquery/bootstrap.min.js' %}"></script>
+<script data-turbolinks-track="true" type="text/javascript"
+        src="{% static '/js/jquery/bootstrap-select.min.js' %}"></script>
+<script data-turbolinks-track="true" type="text/javascript"
+        src="{% static '/js/jquery/jquery-ui-1.10.4.custom.min.js' %}"></script>
+<script data-turbolinks-track="true" type="text/javascript"
+        src="{% static '/js/jquery/jquery.iframe-transport.js' %}"></script>
+<script data-turbolinks-track="true" type="text/javascript"
+        src="{% static '/js/jquery/jquery.fileupload.js' %}"></script>
+<script data-turbolinks-track="true" type="text/javascript" src="{% static '/js/jquery/turbolinks.js' %}"></script>
+<script data-turbolinks-track="true" type="text/javascript" src="{% static '/js/jquery/filepond.js' %}"></script>
+<script data-turbolinks-track="true" type="text/javascript" src="{% static '/js/jquery/jquery-ui.min.js' %}"></script>
+<script data-turbolinks-track="true" type="text/javascript" src="{% static '/js/jquery/get_cookie.js' %}"></script>
+<script data-turbolinks-track="true" type="text/javascript"
+        src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+<script data-turbolinks-track="true" type="text/javascript" src="{% static '/js/uploadfile/jquery.form.js' %}"></script>
+<script data-turbolinks-track="true" type="text/javascript" src="{% static '/js/uploadfile/sha256.js' %}"></script>
+<script data-turbolinks-track="true" type="text/javascript"
+        src="{% static '/js/uploadfile/jquery.uploadfile.js' %}"></script>
+<script data-turbolinks-track="true" src="../static/js/jquery/select2.js"></script>
+<script data-turbolinks-track="true" type="text/javascript" src="{% static '/js/find_overlapped.js' %}"></script>
+{% endblock script%}
+</html>

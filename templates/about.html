@@ -1,0 +1,214 @@
+{% extends '_nav_banner_modal.html' %}
+{% load static %}
+{% block content %}
+
+    <div id="get-started">
+
+    <h1 style="white-space:nowrap;color:#0C324C;" class="mt-5">About</h1>
+<!-- Modal -->
+<div class="modal fade" id="about" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel" style="color:#094C8B;"><b>About NARWHAL</b></h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <h6>We developed a web interface to the NARWHAL, so users can easily submit
+                 DNA-seq/RNA-seq/LC-MASS files to the web server, select specific HLA types, and receive
+                 identified neoantigen candidates back by emails.</h6>
+             <hr/>
+             <h5 style="color:#094C8B;"><b>What can NARWHAL do?</b></h5>
+             <h6><strong>NARWHAL</strong> is a comprehensive tool to identify putative neoantigens.
+                 This web-based toolkit can analyze various sample types (DNA-seq, RNA-seq, and LC-MS/MS data) which can identify both mTSAs and aeTSA with optimized steps. In addition, We also provide a web-based application to predict human leukocyte antigen (HLA) genotypes. </h6>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Modal End-->
+
+<!-- <!Help module> -->
+<div class="card text-dark" style="background-color: #fafafa;">
+  <div class="card-heading">
+  </div>
+  <div class="card-body">
+    <p style="font-size:150%;color:#0a3b5a;"><b>About NARWHAL</b></h5>
+    <p style="font-size:120%;color:#08588a;"> We developed a web interface to the NARWHAL, so users can easily submit
+        DNA-seq/RNA-seq/LC-MASS files to the web server, select specific HLA types, and receive
+        identified neoantigen candidates back by emails.</p>
+  </div>
+</div>
+<div class="card text-dark mb-3" style="background-color: #fafafa;">
+  <div class="card-heading">
+  </div>
+  <div class="card-body">
+    <p style="font-size:150%;color:#0a3b5a;"><b>What can NARWHAL do?</b></h5>
+        <p style="font-size:120%;color:#08588a;"> <b>NARWHAL</b> is a comprehensive tool to identify putative neoantigens.
+            This web-based toolkit can analyze various sample types (DNA-seq, RNA-seq, and LC-MS/MS data) which can identify both mTSAs and aeTSA with optimized steps. In addition, We also provide a web-based application to predict human leukocyte antigen (HLA) genotypes.</p>
+  </div>
+</div>
+
+<!-- update info -->
+<div class="card text-dark mb-3" style="background-color: #f4f8ff;">
+  <div class="card-heading">
+    <h3 class="card-header" style="background-color: #d0e0fa;">NARWHAL Update Information</h3>
+  </div>
+  <div class="card-body">
+      <table class="table table-striped table-condensed">
+        <thead>
+          <tr>
+            <th>Version</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+		{% autoescape off %}
+		  {% for version, description in updates_list %}
+          <tr>
+            <td>{{version}}</td>
+            <td>{{description}}</td>
+          </tr>
+		  {% endfor %}
+		{% endautoescape %}
+    
+        </tbody>
+     </table>
+  </div>
+</div>
+
+<!-- demo data info -->
+<div class="card text-dark mb-3" style="background-color: #f4f8ff;">
+  <div class="card-heading">
+    <h3 class="card-header" style="background-color: #d0e0fa;">NARWHAL Example Data</h3>
+  </div>
+  <div class="card-body">
+      <table class="table table-striped table-condensed">
+        <thead>
+          <tr>
+            <th>Data Type</th>
+            <th>Source</th>
+            <th>Download Link</th>
+          </tr>
+        </thead>
+        <tbody>
+		{% autoescape off %}
+		  {% for Source, Links, Description, Type in demo_data_list %}
+          <tr>
+            <td>{{Type}}</td>
+            <td>{{Source}}</td>
+            <td><a href="{{Links}}" target="_blank">{{Description}}</a></td>
+          </tr>
+		  {% endfor %}
+		{% endautoescape %}
+    
+        </tbody>
+     </table>
+  </div>
+</div>
+
+<!-- third party tools -->
+<div class="card text-dark mb-3" style="background-color: #f4f8ff;">
+  <div class="card-heading">
+    <h3 class="card-header" style="background-color: #d0e0fa;">List of Third-party Tools Incorporated into NARWHAL</h3>
+  </div>
+  <div class="card-body">
+      <table class="table table-striped table-condensed">
+        <thead>
+          <tr>
+            <th>Tool Name</th>
+            <th>Version</th>
+            <th>Executing Function</th>
+          </tr>
+        </thead>
+        <tbody>
+		{% autoescape off %}
+		  {% for tool_name, tool_ver, tool_func, tool_url in tools_list %}
+          <tr>
+            <td><a href="{{tool_url}}" target="_blank">{{tool_name}}</a></td>
+            <td>{{tool_ver}}</td>
+            <td>{{tool_func}}</td>
+          </tr>
+		  {% endfor %}
+		{% endautoescape %}
+        </tbody>
+     </table>
+  </div>
+</div>
+<!-- database -->
+<div class="card text-dark mb-3" style="background-color: #f4f8ff;">
+    <div class="card-heading">
+      <h3 class="card-header" style="background-color: #d0e0fa;">List of Databases Incorporated into NARWHAL</h3>
+    </div>
+    <div class="card-body">
+        <table class="table table-striped table-condensed">
+          <thead>
+            <tr>
+              <th>Database Name</th>
+              <th>Released Version/Date</th>
+            </tr>
+          </thead>
+          <tbody>
+          {% autoescape off %}
+            {% for db_name, db_ver, db_url in databases_list %}
+            <tr>
+              <td><a href="{{db_url}}" target="_blank">{{db_name}}</a></td>
+              <td>{{db_ver}}</td>
+            </tr>
+            {% endfor %}
+          {% endautoescape %}
+          </tbody>
+       </table>
+    </div>
+  </div>
+
+  <!-- hla database -->
+<div class="card text-dark mb-3" style="background-color: #f4f8ff;">
+  <div class="card-heading">
+    <h3 class="card-header" style="background-color: #d0e0fa;">List of HLA Types Supported by NARWHAL</h3>
+  </div>
+  <div class="card-body">
+    <p><a class="btn btn-secondary" href="{% static 'data/hla_type_databases.tsv' %}" target="_blank" role="button"> Download </a></p>
+      <!-- <table class="table table-striped table-condensed">
+        <thead>
+          <tr>
+            <th><b>HLA type A</b></th>
+            <th><b>HLA type B</b></th>
+            <th><b>HLA type C</b></th>
+          </tr>
+        </thead>
+        <tbody>
+        {% autoescape off %}
+          {% for typeA, typeB, typeC in hla_list %}
+          <tr>
+            <td>{{typeA}}</td>
+            <td>{{typeB}}</td>
+            <td>{{typeC}}</td>
+          </tr>
+          {% endfor %}
+        {% endautoescape %}
+        </tbody>
+     </table> -->
+  </div>
+</div>
+
+{% endblock content %}
+
+{% block script %}
+<script>
+function htmlDecode(input){
+  var e = document.createElement('textarea');
+  e.innerHTML = input;
+  // handle case of empty input
+  return e.childNodes.length === 0 ? "" : e.childNodes[0].nodeValue;
+}
+
+window.onload = function(){
+	encoded_mail_address = "&#100;&#48;&#48;&#57;&#52;&#53;&#48;&#48;&#54;&#64;&#110;&#116;&#117;&#46;&#101;&#100;&#117;&#46;&#116;&#119;";
+	document.getElementById("contact_email").href = "mailto:"+htmlDecode(encoded_mail_address);
+};
+</script>
+
+{% endblock script %}

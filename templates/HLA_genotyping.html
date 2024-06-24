@@ -1,0 +1,168 @@
+{% extends '_nav_banner_modal.html' %}
+{% load static %}
+{% block css %}
+    <!-- Bootstrap core CSS -->
+    <!-- Custom styles for this template -->
+    <link rel="stylesheet" href="{% static 'css/jquery.uploadfile.css' %}" type="text/css">
+{% endblock css %}
+{% block content %}
+
+<h1 style="white-space:nowrap;color:#0C324C;" class="mt-5">HLA Genotyping</h1>
+    
+<script data-turbolinks-track="true" src="../static/js/jquery/jquery-1.11.1.min.js"></script>
+    <script data-turbolinks-track="true" src="../static/js/jquery/bootstrap.min.js"></script>
+    <script data-turbolinks-track="true" src="../static/js/jquery/bootstrap-select.min.js"></script>
+    <script data-turbolinks-track="true" src="../static/js/jquery/jquery-ui-1.10.4.custom.min.js"></script>
+    <script data-turbolinks-track="true" src="../static/js/jquery/jquery.iframe-transport.js"></script>
+    <script data-turbolinks-track="true" src="../static/js/jquery/turbolinks.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <script data-turbolinks-track="true" src="../static/js/jquery/select2.js"></script>
+<div class="content col-md-0" id="get-started">  
+</div>
+
+<style type="text/css">
+h4 {
+      text-indent: 25px;
+    }
+.tab { margin-left: 20px; }
+
+</style>
+
+<form action="{% url 'hla_result' %}" method="POST" target="_blank">
+{% csrf_token %}
+        <div class="card text-dark mb-3" style="background-color: #f4f8ff;">
+            <div class="card-heading">
+                <h3 class="card-header" style="background-color: #d0e0fa;">Basic Information</h3></div>
+            <div class="card-body">
+                <p>please provide your basic information.</p>
+                <div class="form-group">
+                    <label for="email">Email address:</label>
+                    <input type="email" class="form-control" name="email" id="email" required/>
+                </div>
+                <p>Please re-enter your Email for comfirmation.</p>
+                <div class="form-group">
+                    <label for="email">Re-enter Email address:</label>
+                    <input type="email" class="form-control" name="re_enter" id="re_enter" required/>
+                </div>
+            </div>
+        
+        <!-- step0. Select data types -->
+        <div class="card text-dark mb-3" style="background-color: #f4f8ff;">
+            <div class="card-heading">
+            <h3 class="card-header" style="background-color: #d0e0fa;">Step 1. Input data type selection</h3></div>
+            <div class="card-body">
+                In this step, please choose the input data type as either DNA-seq or RNA-seq. Please select only one of them, as the prediction models will be different for each.                <label class="radio-inline">
+                <label class="radio-inline">
+                    <input type="radio" name="data_type" id="DNA" value="DNA" checked/> DNA    
+                </label>
+                <label class="radio-inline">
+                    <input type="radio" name="data_type" id="RNA" value="RNA"/> RNA    
+                </label>
+        </div>
+
+        <!-- step1. data upload -->
+        <div class="card text-dark mb-3" style="background-color: #f4f8ff;">
+            <div class="card text-dark mb-3" style="background-color: #f4f8ff;"> <!--quality check-->
+                <div class="card-heading">
+                    <h3 class="card-header" style="background-color: #d0e0fa;">Step 2. Reads Upload</h3></div>
+                <div class="card-body">
+                    Select a method for uploading files:<br/>
+                    <label class="radio-inline">
+                        <input type="radio" name="rad_upload_method" id="from_browser" value="from_browser" checked/>From browser
+                    </label>
+                    <label class="radio-inline">
+                        <input type="radio" name="rad_upload_method" id="from_url" value="from_url"/>From URLs
+                    </label>
+                    <input type="hidden" id="upload_method" name="upload_method" value=""/>
+                    <div id="browser_upload">
+                        <p>Please upload your <b> DNA-seq or RNA-seq </b> files R1 and R2 here. Only allow <b>.fastq.gz</b> format. Maximum size for each file: <b>20 GB</b>. Please note that uploading your files may take some time, so please refrain from refreshing the page while the data is being uploaded.</p>
+                        <div id="upload_area">
+                            <div id="fileuploader"></div>
+                            <div id="upload_button" class="btn btn-primary start">
+                                
+                                <span>Start upload</span>
+                                <p>{{msg}}</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="url_upload">
+                        <p>Please provide the Google Drive file IDs (e.g., https://drive.google.com/file/d/<b>Google Drive file ID</b> /view) of your
+                            sequencing files in R1 and R2 fields. Using a share link from Google Drive is available.
+                            Only allow <b>.fastq</b>/<b>.fq</b> and <b>.gz</b> format.</p>
+                        <label for="url_R1">R1:</label>
+                        <div id="url_R1_err" style="color:red;"></div>
+                        <input type="text" class="form-control" id="url_R1" name="url_R1" style="margin-bottom: 10px;"/>
+                        <input type="hidden" id="confirmed_url_R1" name="confirmed_url_R1" value=""/>
+                        <label for="url_R2">R2:</label>
+                        <div id="url_R2_err" style="color:red;"></div>
+                        <input type="text" class="form-control" id="url_R2" name="url_R2" style="margin-bottom: 10px;"/>
+                        <input type="hidden" id="confirmed_url_R2" name="confirmed_url_R2" value=""/>
+                        <div id="url_confirm_button" class="btn btn-primary start">
+                            <i class="glyphicon glyphicon-cloud-download"></i>
+                            <span>Confirm URLs</span>
+                        </div>
+                    </div>
+
+                </div>
+                <input type="hidden" id="upload_id" name="upload_id" value=""/>
+            </div>
+
+            <!-- Step 2. HLA genotyping -->
+                <div class="card-heading">
+                    <h3 class="card-header" style="background-color: #d0e0fa;">Step 3. HLA genotyping</h3></div>
+                <div class="card-body">
+                    In this step, we provide <I>arcasHLA</I> to perform genotyping for HLA class I and class II genes
+                    from RNA sequencing.<br/>
+                </div>
+            </div>
+            <!-- Privacy Statement -->
+                <div class="card-heading">
+                    <h3 class="card-header" style="background-color: #d0e0fa;">Step 4. Privacy Statement</h3></div>
+                <div class="card-body">
+                    NARWHAL NEVER shares users' uploaded data and results with others. All data and metadata of one
+                    task will be removed automatically from the server without any copies after <b>7 days</b> of the
+                    report generated.
+                    <p></p>
+                    <input class="form-check-input" type="checkbox" name="accept_privacy_statement"
+                           id="accept_privacy_statement" value="accept"/>
+                    <label class="form-check-label" for="accept_privacy_statement">I have read the Privacy Statement of NARWHAL and accept NARWHAL to process my upload data.</label>
+                </div>
+            </div>
+
+            <div id="submission_panel">
+                <div class="card text-dark bg-light mb-3">
+                    <div class="card-heading">
+                        <h3 class="card-header" style="background-color: #d0e0fa;">Step 5. Data submission</h3></div>
+                    <div class="card-body">
+                        <button class="btn btn-default btn-success" type="submit" id="submit">Submit</button>
+                    </div>
+                </div>
+    </div>
+</form>
+{% endblock content %}
+{% block script %}
+<script data-turbolinks-track="true" type="text/javascript"
+        src="{% static '/js/jquery/jquery-1.11.1.min.js' %}"></script>
+<script data-turbolinks-track="true" type="text/javascript" src="{% static '/js/jquery/bootstrap.min.js' %}"></script>
+<script data-turbolinks-track="true" type="text/javascript"
+        src="{% static '/js/jquery/bootstrap-select.min.js' %}"></script>
+<script data-turbolinks-track="true" type="text/javascript"
+        src="{% static '/js/jquery/jquery-ui-1.10.4.custom.min.js' %}"></script>
+<script data-turbolinks-track="true" type="text/javascript"
+        src="{% static '/js/jquery/jquery.iframe-transport.js' %}"></script>
+<script data-turbolinks-track="true" type="text/javascript"
+        src="{% static '/js/jquery/jquery.fileupload.js' %}"></script>
+<script data-turbolinks-track="true" type="text/javascript" src="{% static '/js/jquery/turbolinks.js' %}"></script>
+<script data-turbolinks-track="true" type="text/javascript" src="{% static '/js/jquery/filepond.js' %}"></script>
+<script data-turbolinks-track="true" type="text/javascript" src="{% static '/js/jquery/jquery-ui.min.js' %}"></script>
+<script data-turbolinks-track="true" type="text/javascript" src="{% static '/js/jquery/get_cookie.js' %}"></script>
+<script data-turbolinks-track="true" type="text/javascript"
+        src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+<script data-turbolinks-track="true" type="text/javascript" src="{% static '/js/uploadfile/jquery.form.js' %}"></script>
+<script data-turbolinks-track="true" type="text/javascript" src="{% static '/js/uploadfile/sha256.js' %}"></script>
+<script data-turbolinks-track="true" type="text/javascript"
+        src="{% static '/js/uploadfile/jquery.uploadfile.js' %}"></script>
+<script data-turbolinks-track="true" type="text/javascript" src="{% static '/js/HLA_typing.js' %}"></script>
+{% endblock script%}
+</html>

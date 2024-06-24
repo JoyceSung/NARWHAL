@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block title %}NotAllow{% endblock title %}
+
+{% block content %}
+{% csrf_token %}
+
+<div class="content col-md-8" id="get-started">
+    <p style="white-space:nowrap;font-size:220%;color:#0C324C;"><b>Submission is not allowed.</b></p>
+    <h3>{{msg}}</h3>
+</div>
+{% endblock content %}

@@ -1,0 +1,147 @@
+{% load static %}
+<!doctype html>
+<html lang="en" class="h-100">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="Mark Otto, Jacob Thornton, and  contributors">
+    <meta name="generator" content="Hugo 0.88.1">
+    <title>NARWHAL</title>
+{% block head_tags %}{% endblock head_tags %}
+    <link rel="canonical" href="https://getbootstrap.com/docs/5.1/examples/sticky-footer-navbar/">
+
+    
+
+    <!-- Bootstrap core CSS -->
+    {% block css %} {% endblock css %}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.0/css/bootstrap.min.css" integrity="sha512-F7WyTLiiiPqvu2pGumDR15med0MDkUIo5VTVyyfECR5DZmCnDhti9q5VID02ItWjq6fvDfMaBaDl2J3WdL1uxA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+   
+    <!-- Favicons -->
+<link rel="apple-touch-icon" href="{% static '/image/narwhal_cute.png' %}" sizes="180x180">
+<link rel="icon" href="{% static '/image/narwhal_cute.png' %}" sizes="32x32" type="image/png">
+<link rel="icon" href="{% static '/image/narwhal_cute.png' %}" sizes="16x16" type="image/png">
+<link rel="mask-icon" href="/docs/5.1/assets/img/favicons/safari-pinned-tab.svg" color="#7952b3">
+<link rel="icon" href="{% static '/image/narwhal_cute.png' %}">
+<meta name="theme-color" content="#7952b3">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Varela+Round&display=swap" rel="stylesheet">
+    <style>
+      body{font-family: 'Varela Round', sans-serif;}
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        user-select: none;
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+    </style>
+
+    
+    <!-- Custom styles for this template -->
+  </head>
+  <body class="d-flex flex-column h-100">
+    
+<header>
+  <!-- Fixed navbar -->
+  <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark" style="background-color:#405a80 !important">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="/">
+        <img id="logo" alt="Logo" src="{% static '/image/narwhal_cute.png' %}"  width="25" height="25" />
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarCollapse">
+        <ul class="navbar-nav me-auto mb-2 mb-md-0">
+        
+          <li class="nav-item">
+            <a class="nav-link" href="../neoantigen-identification">Neoantigen Identification</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link " href="../hlagenotyping">HLA Genotyping</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link " href="../find-overlapped">Shared Neoantigens</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link " href="../tutorial">Tutorial</a>
+          </li>
+              <li class="nav-item">
+            <a class="nav-link " href="../about">About</a>     
+          </li>
+              <li class="nav-item">
+            <a href="#contact" class="nav-link " data-bs-toggle="modal" data-bs-target="#contact">Contact</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  
+</header>
+
+<!-- ContactModal -->
+<div class="modal fade" id="contact" tabindex="-1" aria-labelledby="exampleModalLabel2" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel2" style="color:#094C8B;"><b>Contact NARWHAL</b></h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+      <h6><strong>NARWHAL team</strong> will appreciate your feedback. Please send an Email if
+               you wish to make a request, a comment, or report a bug.</h6>
+           <hr/>
+           <h5 style="color:#094C8B;"><b>NARWHAL team:</b></h5>
+           <a href="mailto: r10945012@ntu.edu.tw"><img src="../static/image/email.png"
+                                                       style="width:45px;height:40px"></a>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Contact Modal End-->
+
+<!-- Begin page content -->
+  
+
+<main class="flex-shrink-0 pt-5">
+  <div class="position-relative p-3 p-md-5 m-md-3 text-center" style="background:url(../static/image/back_picture.png);background-repeat:no-repeat;box-shadow:0 0 7px 0 #fffff inset;background-size:cover;"> 
+    <div class="mx-auto">
+      <h1 class="pb-2 text-light display-4 fw-normal">NARWHAL</h1>
+      <p class="pb-2 text-light lead fw-normal" style="font-size:130%">NARWHAL — Neoantigens Recognition Website and HLA Genotyping Tool</p>
+    </div>
+    <div class="product-device shadow-sm d-none d-md-block"></div>
+    <div class="product-device product-device-2 shadow-sm d-none d-md-block"></div>
+</div>
+
+  
+  
+  <div class="container">
+
+    {% block content %}{% endblock content %}
+</main>
+
+<footer class="footer mt-auto py-3 bg-light">
+  <div class="container mb-3 text-center">
+    <span class="text-muted">Developed by Bioinformatics
+        and Biostatistics Core Lab, Center of Genomic Medicine, National Taiwan University.</span>
+  </div>
+</footer>
+
+{% block script %}{% endblock script %}
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.0/js/bootstrap.min.js" integrity="sha512-NWNl2ZLgVBoi6lTcMsHgCQyrZVFnSmcaa3zRv0L3aoGXshwoxkGs3esa9zwQHsChGRL4aLDnJjJJeP6MjPX46Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+      
+  </body>
+</html>

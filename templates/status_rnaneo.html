@@ -1,0 +1,317 @@
+{% extends 'base.html' %}
+{% block title %}Status{% endblock title %}
+{% load static %}
+{% block content %}
+{% csrf_token %}
+{% block css %}
+<link rel="stylesheet" type="text/css" href="{% static 'vertical-timeline/css/style.css' %}">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+{% endblock css %}
+
+<style>
+html,body,h1,h2,h3,h4,h5 {font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;}
+</style>
+<p align="center" style="white-space:nowrap;font-size:220%;color:#0C324C;"><b>Task Status</b></p>
+{#    <h3 align="center">Your job number is {{task_id}}.</h3>#}
+
+
+<!--
+<p id="qc"></p>
+<p id="denovo"></p>
+<p id="ref"></p>
+<p id="gene_pred"></p>
+<p id="go"></p>
+<p id="tree"></p>-->
+
+<section id="cd-timeline" class="cd-container">
+  <! Step0. input>
+  <div class="cd-timeline-block">
+    <div class="cd-timeline-img cd-bb"><img src="{% static 'vertical-timeline/img/glyphicons-320-sort.png' %}" alt="Picture"></div>
+    <!-- cd-timeline-img -->
+    
+    <div class="cd-timeline-content">
+      <!--<h2>Quality Control</h2>-->
+      <h2><img name="input_checked" src="{% static 'vertical-timeline/img/checked.png' %}" style="display:None"><img name="input_unchecked" src="{% static 'vertical-timeline/img/unchecked.png' %}">&nbsp;&nbsp;Data Preparation</h2>
+      <p id="input"></p>
+    <!-- cd-timeline-content --> 
+    
+    </div>
+
+<! Step1. QC>
+  <div class="cd-timeline-block">
+    <div class="cd-timeline-img cd-red"><img src="{% static 'vertical-timeline/img/glyphicons-28-search.png' %}" alt="Picture"></div>
+    <!-- cd-timeline-img -->
+    
+    <div class="cd-timeline-content">
+      <!--<h2>Quality Control</h2>-->
+      <h2><img name="qc_checked" src="{% static 'vertical-timeline/img/checked.png' %}" style="display:None"><img name="qc_unchecked" src="{% static 'vertical-timeline/img/unchecked.png' %}">&nbsp;&nbsp;Quality Control</h2>
+      <p id="qc"></p>
+    <!-- cd-timeline-content --> 
+    
+    </div>
+  <!-- cd-timeline-block -->
+
+<! Step2. GATK analysis>
+  <div class="cd-timeline-block">
+    <div class="cd-timeline-img cd-orange"> <img src="{% static 'vertical-timeline/img/glyphicons-599-scissors-alt.png' %}" alt="Movie"> </div>
+    <!-- cd-timeline-img -->
+
+    <div class="cd-timeline-content">
+      <h2><img name="gatk_checked" src="{% static 'vertical-timeline/img/checked.png' %}" style="display:None"><img name="gatk_unchecked" src="{% static 'vertical-timeline/img/unchecked.png' %}">&nbsp;&nbsp;<i>Data Preprocessing</i></h2>
+      <p id="gatk"></p>
+    <!-- cd-timeline-content -->
+    </div>
+  <!-- cd-timeline-block -->
+
+  <! Step3. Somatic mutation>
+  <div class="cd-timeline-block">
+    <div class="cd-timeline-img cd-yellow"> <img src="{% static 'vertical-timeline/img/glyphicons-111-align-left.png' %}" alt="Movie"> </div>
+    <!-- cd-timeline-img -->
+
+    <div class="cd-timeline-content">
+      <h2><img name="somatic_checked" src="{% static 'vertical-timeline/img/checked.png' %}" style="display:None"><img name="somatic_unchecked" src="{% static 'vertical-timeline/img/unchecked.png' %}">&nbsp;&nbsp;<i>Somatic Mutation Calling</i></h2>
+      <p id="somatic"></p>
+    <!-- cd-timeline-content -->
+    </div>
+  <!-- cd-timeline-block -->
+
+  <! Step4. RNA Expression Level Calculation>
+  <div class="cd-timeline-block">
+    <div class="cd-timeline-img cd-blue"> <img src="{% static 'vertical-timeline/img/glyphicons-42-charts.png' %}" alt="Movie"> </div>
+    <!-- cd-timeline-img -->
+
+    <div class="cd-timeline-content">
+      <h2><img name="kallisto_checked" src="{% static 'vertical-timeline/img/checked.png' %}" style="display:None"><img name="kallisto_unchecked" src="{% static 'vertical-timeline/img/unchecked.png' %}">&nbsp;&nbsp;<i>RNA Expression Level Calculation</i></h2>
+      <p id="kallisto"></p>
+    <!-- cd-timeline-content -->
+    </div>
+  <!-- cd-timeline-block -->
+
+  <! Step5. Filtering Result>
+  <div class="cd-timeline-block">
+    <div class="cd-timeline-img cd-grey"> <img src="{% static 'vertical-timeline/img/glyphicons-599-scissors-alt.png' %}" alt="Movie"> </div>
+    <!-- cd-timeline-img -->
+
+    <div class="cd-timeline-content">
+      <h2><img name="filtering_checked" src="{% static 'vertical-timeline/img/checked.png' %}" style="display:None"><img name="filtering_unchecked" src="{% static 'vertical-timeline/img/unchecked.png' %}">&nbsp;&nbsp;<i>RNA Expression Level Filtering</i></h2>
+      <p id="filtering"></p>
+    <!-- cd-timeline-content -->
+    </div>
+  <!-- cd-timeline-block -->
+
+  <! Step6.0. HLA typing>
+  <div class="cd-timeline-block">
+    <div class="cd-timeline-img cd-lightorange"> <img src="{% static 'vertical-timeline/img/glyphicons-489-multiple-displays.png' %}" alt="Movie"> </div>
+    <!-- cd-timeline-img -->
+
+    <div class="cd-timeline-content">
+      <h2><img name="hla_checked" src="{% static 'vertical-timeline/img/checked.png' %}" style="display:None"><img name="hla_unchecked" src="{% static 'vertical-timeline/img/unchecked.png' %}">&nbsp;&nbsp;<i>HLA Genotyping</i></h2>
+      <p id="hla"></p>
+  </div>
+
+  <! Step6. aeTSA generation>
+  <div class="cd-timeline-block">
+    <div class="cd-timeline-img cd-pink"> <img src="{% static 'vertical-timeline/img/glyphicons-111-align-left.png' %}" alt="Movie"> </div>
+    <!-- cd-timeline-img -->
+
+    <div class="cd-timeline-content">
+      <h2><img name="aeTSA_checked" src="{% static 'vertical-timeline/img/checked.png' %}" style="display:None"><img name="aeTSA_unchecked" src="{% static 'vertical-timeline/img/unchecked.png' %}">&nbsp;&nbsp;<i>aeTSA Generation (k-mer profiling)</i></h2>
+      <p id="aeTSA"></p>
+    <!-- cd-timeline-content -->
+    </div>
+  <!-- cd-timeline-block -->
+
+  <! Step7. Pvactools Result>
+  <div class="cd-timeline-block">
+    <div class="cd-timeline-img cd-cool"> <img src="{% static 'vertical-timeline/img/glyphicons-489-multiple-displays.png' %}" alt="Movie"> </div>
+    <!-- cd-timeline-img -->
+
+    <div class="cd-timeline-content">
+      <h2><img name="pvactools_checked" src="{% static 'vertical-timeline/img/checked.png' %}" style="display:None"><img name="pvactools_unchecked" src="{% static 'vertical-timeline/img/unchecked.png' %}">&nbsp;&nbsp;<i>MHC Binding Affinity Prediction</i></h2>
+      <p id="pvactools"></p>
+    <!-- cd-timeline-content -->
+    </div>
+  <!-- cd-timeline-block -->
+
+  <! Step8. MASS Result>
+  <div class="cd-timeline-block">
+    <div class="cd-timeline-img cd-darkgreen"> <img src="{% static 'vertical-timeline/img/glyphicons-320-sort.png' %}" alt="Movie"> </div>
+    <!-- cd-timeline-img -->
+
+    <div class="cd-timeline-content">
+      <h2><img name="mass_checked" src="{% static 'vertical-timeline/img/checked.png' %}" style="display:None"><img name="mass_unchecked" src="{% static 'vertical-timeline/img/unchecked.png' %}">&nbsp;&nbsp;<i>LC-MS/MS Validation</i></h2>
+      <p id="mass"></p>
+    <!-- cd-timeline-content -->
+    </div>
+  <!-- cd-timeline-block -->
+
+  <! Step6. aeTSA Annotation>
+  <div class="cd-timeline-block">
+    <div class="cd-timeline-img cd-bluegreen"> <img src="{% static 'vertical-timeline/img/glyphicons-30-notes-2.png' %}" alt="Movie"> </div>
+    <!-- cd-timeline-img -->
+
+    <div class="cd-timeline-content">
+      <h2><img name="aeTSA_annotation_checked" src="{% static 'vertical-timeline/img/checked.png' %}" style="display:None"><img name="aeTSA_annotation_unchecked" src="{% static 'vertical-timeline/img/unchecked.png' %}">&nbsp;&nbsp;<i>aeTSA Annotation</i></h2>
+      <p id="aeTSA_annotation"></p>
+    <!-- cd-timeline-content -->
+    </div>
+  <!-- cd-timeline-block -->
+
+ <! Step7. Total Result>
+  <div class="cd-timeline-block">
+    <div class="cd-timeline-img cd-green"> <img src="{% static 'vertical-timeline/img/glyphicons-320-sort.png' %}" alt="Picture"> </div>
+    <!-- cd-timeline-img -->
+
+    <div class="cd-timeline-content">
+      <h2><img name="result_checked" src="{% static 'vertical-timeline/img/checked.png' %}" style="display:None"><img name="result_unchecked" src="{% static 'vertical-timeline/img/unchecked.png' %}">&nbsp;&nbsp;Generating Reports</h2>
+      <p id="result"></p>
+    <!-- cd-timeline-content -->
+
+    </div>
+  </div>
+  </div>
+  </div>
+  </div>
+  </div>
+</section>
+{% endblock content %}
+
+{% block script %}
+<script type="text/javascript" src="{% static 'vertical-timeline/js/modernizr.js' %}"></script>
+<script data-turbolinks-track="true" src="../static/js/jquery/jquery-1.11.1.min.js"></script>
+<script data-turbolinks-track="true" src="../static/js/jquery/bootstrap.min.js"></script>
+<script data-turbolinks-track="true" src="../static/js/jquery/bootstrap-select.min.js"></script>
+<script data-turbolinks-track="true" src="../static/js/jquery/jquery-ui-1.10.4.custom.min.js"></script>
+<script data-turbolinks-track="true" src="../static/js/jquery/jquery.iframe-transport.js"></script>
+<script data-turbolinks-track="true" src="../static/js/jquery/jquery.fileupload.js"></script>
+<script data-turbolinks-track="true" src="../static/js/jquery/turbolinks.js"></script>
+<script type="text/javascript">
+function retrieve(){      
+    $.ajax({
+                type: 'GET',
+                url: "./retrievernaneo",
+                dataType: "json",
+                error: function () {
+                    // do nothing
+                },
+                success: function (data) {
+                    if((data['total_status']=="SUCCESSFUL")||(data['total_status']=="FAILED"))
+                    {
+                        //window.location.reload();
+                        window.location.replace("./report-rna");
+                    };
+                    $("#total_status").text("Total Status:"+data['total_status']);
+                    $("#input").text(data['data_preparation_status']);
+                    $("#qc").text(data['quality_check_status']);
+                    $("#gatk").text(data['gatk_status']);
+                    $("#somatic").text(data['somatic_status']);
+                    $("#kallisto").text(data['expression_level_status']);
+                    $("#filtering").text(data['filtering_status']);
+                    $("#hla").text(data['hla_status']);
+                    $("#pvactools").text(data['pvactools_status']);
+                    $("#aeTSA").text(data['aeTSA_status']);
+                    $("#aeTSA_annotation").text(data['aeTSA_annotation_status']);
+                    $("#mass").text(data['mass_status']);
+                    $("#result").text(data['rna_total_status']);
+                    if(data['data_preparation_status']=="SUCCESSFUL")
+                    {
+                        $("img[name='input_unchecked']").css("display", "none");
+                        $("img[name='input_checked']").css("display", "inline");
+                        //$("img[name='input']").toggle();
+                    
+                    };
+                    if(data['quality_check_status']=="SUCCESSFUL")
+                    {
+                        $("img[name='qc_unchecked']").css("display", "none");
+                        $("img[name='qc_checked']").css("display", "inline");
+                        //$("img[name='qc']").toggle();
+                    
+                    };
+                    if(data['gatk_status']=="SUCCESSFUL")
+                    {
+                        $("img[name='gatk_unchecked']").css("display", "none");
+                        $("img[name='gatk_checked']").css("display", "inline");
+                        //$("img[name='qc']").toggle();
+                    
+                    };
+                    if(data['somatic_status']=="SUCCESSFUL")
+                    {
+                        $("img[name='somatic_unchecked']").css("display", "none");
+                        $("img[name='somatic_checked']").css("display", "inline");
+                        //$("img[name='qc']").toggle();
+                    
+                    };
+                    if(data['expression_level_status']=="SUCCESSFUL")
+                    {
+                        $("img[name='kallisto_unchecked']").css("display", "none");
+                        $("img[name='kallisto_checked']").css("display", "inline");
+                        //$("img[name='qc']").toggle();
+                    
+                    };
+                    if(data['filtering_status']=="SUCCESSFUL")
+                    {
+                        $("img[name='filtering_unchecked']").css("display", "none");
+                        $("img[name='filtering_checked']").css("display", "inline");
+                        //$("img[name='qc']").toggle();
+                    
+                    };
+                    if(data['hla_status']=="SUCCESSFUL")
+                    {
+                        $("img[name='hla_unchecked']").css("display", "none");
+                        $("img[name='hla_checked']").css("display", "inline");
+                        //$("img[name='hla']").toggle();
+                    
+                    };
+                    if(data['pvactools_status']=="SUCCESSFUL")
+                    {
+                        $("img[name='pvactools_unchecked']").css("display", "none");
+                        $("img[name='pvactools_checked']").css("display", "inline");
+                        //$("img[name='qc']").toggle();
+                    
+                    };
+                    if(data['aeTSA_status']=="SUCCESSFUL")
+                    {
+                        $("img[name='aeTSA_unchecked']").css("display", "none");
+                        $("img[name='aeTSA_checked']").css("display", "inline");
+                        //$("img[name='qc']").toggle();
+                    
+                    };
+                    if(data['mass_status']=="SUCCESSFUL")
+                    {
+                        $("img[name='mass_unchecked']").css("display", "none");
+                        $("img[name='mass_checked']").css("display", "inline");
+                        //$("img[name='qc']").toggle();
+                        
+                    };
+                    if(data['aeTSA_annotation_status']=="SUCCESSFUL")
+                    {
+                        $("img[name='aeTSA_annotation_unchecked']").css("display", "none");
+                        $("img[name='aeTSA_annotation_checked']").css("display", "inline");
+                        //$("img[name='qc']").toggle();
+                        
+                    };
+                     if(data['rna_total_status']=="SUCCESSFUL")
+                    {
+                        $("img[name='result_unchecked']").css("display", "none");
+                        $("img[name='result_checked']").css("display", "inline");
+                        //$("img[name='qc']").toggle();
+                    
+                    };
+                        
+                }
+            });
+}
+$(document).ready(function () {
+   retrieve(); 
+   setInterval(function(){retrieve();}, 60000);  //update every 60 sec
+   // var $timeline_block = $('.cd-timeline-block');
+
+   //  //hide timeline blocks which are outside the viewport
+   //  $timeline_block.each(function(){
+     
+   //          $(this).find('.cd-timeline-img, .cd-timeline-content').addClass('bounce-in');
+        
+    });
+</script>
+{% endblock script %}

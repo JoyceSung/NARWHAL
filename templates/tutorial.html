@@ -1,0 +1,572 @@
+{% extends '_nav_banner_modal.html' %}
+{% load static %}
+{% block content %}
+
+    <div id="get-started">
+
+    <h1 style="white-space:nowrap;color:#0C324C;" class="mt-5">Tutorial</h1>
+
+<!-- <!Help module> -->
+
+<div class="card text-dark mb-3" style="background-color: #fafafa;">
+  <div class="card-heading">
+  </div>
+  <div class="card-body">
+      <p style="font-size:140%;color:#053857;"> Click the "Guide" button to see the step-by-step guide for analyzing your data on NARWHAL.</p>
+      <p><a class="btn btn-primary" style="font-size:140%" href="../guide" target="_blank" role="button">Guide</a></p>
+      <p style="font-size:140%;color:#053857;"> Click the 'Manual' button to download the NARWHAL instruction manual for detailed information on general introduction, usage, and data interpretation.</p>
+      <p><a class="btn btn-primary" style="font-size:140%" href="{% static 'data/tutorial.pdf' %}" target="_blank" role="button">Manual</a></p>
+
+  </div>
+</div>
+<div class="card text-dark" style="background-color: #fafafa;">
+  <div class="card-heading">
+  </div>
+  <div class="card-body">
+      <p style="font-size:140%;color:#053857;"> <b>Demo video for analyzing data on NARWHAL.</b></p>
+      <p></p>
+      <video src="{% static 'image/website_demo.mp4' %}"
+       poster="{% static 'image/web_logo.png' %}"
+       width="360" 
+       height="256" 
+       autoplay="true" 
+       controls="true"> </video>
+       <!-- <iframe width="320" height="180" src="https://www.youtube.com/embed/ubRvTeWmzXY" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe> -->
+
+  </div>
+</div>
+<div class="card text-dark mb-3" style="background-color: #f4f8ff;">
+  <div class="card-heading">
+    <h2 class="card-header" style="background-color: #d0e0fa;">Demonstration Reports</h3>
+  </div>
+  <div class="card-body">
+      <table class="table table-striped table-condensed">
+        <thead>
+          <tr>
+            <th style="font-size:140%">Function</th>
+            <th style="font-size:140%">Example Link</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td style="font-size:120%">Neoantigen Identification with DNA-seq (mTSA)</td>
+            <td style="font-size:150%"><a class="btn btn-secondary" href="/d12c9653144688a0156dc8d90b0d805faf29c55161a3843517973b214808b16e/report-dna" target="_blank" role="button">View</a></td>
+          </tr>
+          <tr>
+            <td style="font-size:120%">Neoantigen Identification with RNA-seq (mTSA and aeTSA)</td>
+            <td style="font-size:150%"><a class="btn btn-secondary" href="/66b1d000b948119948956a597fa8050268b89fb23bb73085b8a622e4d945050e/report-rna" target="_blank" role="button">View</a></td>
+          </tr>
+          <tr>
+            <td style="font-size:120%">Neoantigen Identification with DNA-seq (mTSA) and RNA-seq (aeTSA)</td>
+            <td style="font-size:150%"><a class="btn btn-secondary" href="f8a97207312df3edde7e788440366c32fbd17985af8344f86c94d8ab7d9f9c96/report-drna#" target="_blank" role="button">View</a></td>
+          </tr>
+          <tr>
+            <td style="font-size:120%">HLA Genotyping</td>
+            <td style="font-size:150%"><a class="btn btn-secondary" href="0719e82e34571e59cdb9ecacc926d80a90f45741075b8be1cca9be46470e6b75/report" target="_blank" role="button">View</a></td>
+          </tr>
+          <tr>
+            <td style="font-size:120%">Shared Neoantigens in Different Samples</td>
+            <td style="font-size:150%"><a class="btn btn-secondary" href="f212d9b5d6ebd3a953c51b7d0a95f4da862520fcbeec75e4dc27eb8131ca96cd/report-overlapped" target="_blank" role="button">View</a></td>
+          </tr>
+        </tbody>
+     </table>
+  </div>
+</div>
+<!-- Output file column meanings -->
+<div class="card text-dark mb-3" style="background-color: #f4f8ff;">
+  <div class="card-heading">
+    <h2 class="card-header" style="background-color: #d0e0fa;">Output File Columns</h3>
+    <p></p>
+  </div>
+  <div class="card-body">
+    <h2 class="card-title" style="color: rgb(12, 114, 173)"><b>mTSA_tsv.tsv</b></h3>
+      <hr></hr>
+      <p style="font-size:120%"><b>This file is a summary report for mTSA identification. It includes information on variants with highly frequent tumor-mutated genes in the COSMIC database.</b></p>
+      <p></p>
+      <table class="table table-striped table-condensed">
+        <thead>
+          <tr>
+            <th style="font-size:120%"><b>Column Name</b></th>
+            <th style="font-size:120%"><b>Description</b></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td style="font-size:120%">Transcript_info</td>
+            <td style="font-size:120%">A unique ID for the variant which includes some variant and transcript infomation</td>
+          </tr>
+          <tr>
+            <td style="font-size:120%">HLA Alleles (multiple)</td>
+            <td style="font-size:120%">For each HLA allele in the run, the number of this variant’s epitopes that bound well to the HLA allele (with median/lowest mutant binding affinity lower than the binding affinity threshold)</td>
+          </tr>
+          <tr>
+            <td style="font-size:120%">Gene Symbol</td>
+            <td style="font-size:120%">The Ensembl gene name of the affected gene</td>
+          </tr>
+          <tr>
+            <td style="font-size:120%">AA Change</td>
+            <td style="font-size:120%">The amino acid change for the mutation</td>
+          </tr>
+          <tr>
+            <td style="font-size:120%">Num Passing Transcripts</td>
+            <td style="font-size:120%">The number of transcripts with at least one well-binding peptide (median mutant binding affinity < 500 [default]) for this mutation</td>
+          </tr>
+          <tr>
+            <td style="font-size:120%">Best Peptide</td>
+            <td style="font-size:120%">The best-binding mutant epitope sequence</td>
+          </tr>
+          <tr>
+            <td style="font-size:120%">Pos</td>
+            <td style="font-size:120%">The starting position of the mutation within the epitope sequence, counted from 1 (0 if the mutation precedes the epitope)</td>
+          </tr>
+          <tr>
+            <td style="font-size:120%">Num Passing Peptides</td>
+            <td style="font-size:120%">The number of unique well-binding peptides for this mutation</td>
+          </tr>
+          <tr>
+            <td style="font-size:120%">IC50 MT</td>
+            <td style="font-size:120%">Median or lowest ic50 binding affinity of the best-binding mutant epitope across all prediction algorithms used</td>
+          </tr>
+          <tr>
+            <td style="font-size:120%">IC50 WT</td>
+            <td style="font-size:120%">Median or lowest ic50 binding affinity of the corresponding wildtype epitope across all prediction algorithms used</td>
+          </tr>
+          <tr>
+            <td style="font-size:120%">%ile MT</td>
+            <td style="font-size:120%">Median or lowest binding affinity percentile rank of the best-binding mutant epitope across all prediction algorithms used (NetMHC or NetMHCpan)</td>
+          </tr>
+          <tr>
+            <td style="font-size:120%">%ile WT</td>
+            <td style="font-size:120%">Median or lowest binding affinity percentile rank of the best-binding corresponding wildtype epitope across all prediction algorithms used (NetMHC or NetMHCpan)</td>
+          </tr>
+          <tr>
+            <td style="font-size:120%">Chromosome</td>
+            <td style="font-size:120%">The chromosome of this variant</td>
+          </tr>
+          <tr>
+            <td style="font-size:120%">Start</td>
+            <td style="font-size:120%">The start position of this variant in the zero-based, half-open coordinate system</td>
+          </tr>
+          <tr>
+            <td style="font-size:120%">Stop</td>
+            <td style="font-size:120%">The stop position of this variant in the zero-based, half-open coordinate system</td>
+          </tr>
+          <tr>
+            <td style="font-size:120%">Reference</td>
+            <td style="font-size:120%">The reference allele</td>
+          </tr>
+          <tr>
+            <td style="font-size:120%">Variant</td>
+            <td style="font-size:120%">The alt allele</td>
+          </tr>
+          <tr>
+            <td style="font-size:120%">Transcript</td>
+            <td style="font-size:120%">The Ensembl ID of the affected transcript</td>
+          </tr>
+          <tr>
+            <td style="font-size:120%">Transcript Support Level</td>
+            <td style="font-size:120%">The transcript support level (TSL) of the affected transcript</td>
+          </tr>
+          <tr>
+            <td style="font-size:120%">Ensembl Gene ID</td>
+            <td style="font-size:120%">The Ensembl ID of the affected gene</td>
+          </tr>
+          <tr>
+            <td style="font-size:120%">Variant Type</td>
+            <td style="font-size:120%">The type of variant: <b><i>missense</b></i> for missense mutations, <b><i>inframe_ins</i></b> for inframe insertions, <b><i>inframe_del</i></b> for inframe deletions, and <b><i>FS</i></b> for frameshift variants</td>
+          </tr>
+          <tr>
+            <td style="font-size:120%">Mutation</td>
+            <td style="font-size:120%">The amnio acid change of this mutation</td>
+          </tr>
+          <tr>
+            <td style="font-size:120%">Protein Position</td>
+            <td style="font-size:120%">The protein position of the mutation</td>
+          </tr>
+          <tr>
+            <td style="font-size:120%">Gene Name</td>
+            <td style="font-size:120%">The Ensembl gene name of the affected gene</td>
+          </tr>
+          <tr>
+            <td style="font-size:120%">HGVSc</td>
+            <td style="font-size:120%">The HGVS coding sequence variant name</td>
+          </tr>
+          <tr>
+            <td style="font-size:120%">HLA Allele</td>
+            <td style="font-size:120%">The HLA allele for this prediction</td>
+          </tr>
+          <tr>
+            <td style="font-size:120%">Peptide Length</td>
+            <td style="font-size:120%">The peptide length of the epitope</td>
+          </tr>
+          <tr>
+            <td style="font-size:120%">Sub-peptide Position</td>
+            <td style="font-size:120%">The one-based position of the epitope within the protein sequence used to make the prediction</td>
+          </tr>
+          <tr>
+            <td style="font-size:120%">Mutation Position</td>
+            <td style="font-size:120%">The one-based positional range (inclusive) of the mutation within the epitope sequence</td>
+          </tr>
+          <tr>
+            <td style="font-size:120%">MT Epitope Seq</td>
+            <td style="font-size:120%">The mutant epitope sequence</td>
+          </tr>
+          <tr>
+            <td style="font-size:120%">WT Epitope Seq</td>
+            <td style="font-size:120%">The epitope sequence of the wildtype (reference) at the corresponding position in the complete protein sequence. It's "NA" if there's no wildtype sequence at this position or if over half of the amino acids in the mutant epitope have changed.</td>
+          </tr>
+          <tr>
+            <td style="font-size:120%">Best MT IC50 Score Method</td>
+            <td style="font-size:120%">Lowest ic50 binding affinity of all prediction algorithms used</td>
+          </tr>
+          <tr>
+            <td style="font-size:120%">Best MT IC50 Score</td>
+            <td style="font-size:120%">The alt allele</td>
+          </tr>
+          <tr>
+            <td style="font-size:120%">Corresponding WT IC50 Score</td>
+            <td style="font-size:120%">Lowest ic50 binding affinity of all prediction algorithms used</td>
+          </tr>
+          <tr>
+            <td style="font-size:120%">Corresponding Fold Change</td>
+            <td style="font-size:120%">Corresponding WT IC50 Score / Best MT IC50 Score. NA if there is no WT Epitope Seq</td>
+          </tr>
+          <tr>
+            <td style="font-size:120%">Best MT Percentile Method</td>
+            <td style="font-size:120%">Prediction algorithm with the lowest binding affinity percentile rank for this epitope (NetMHC or NetMHCpan)</td>
+          </tr>
+          <tr>
+            <td style="font-size:120%">Best MT Percentile</td>
+            <td style="font-size:120%">Lowest percentile rank of this epitope’s ic50 binding affinity of all prediction algorithms used</td>
+          </tr>
+          <tr>
+            <td style="font-size:120%">Corresponding WT Percentile</td>
+            <td style="font-size:120%">binding affinity percentile rank of the wildtype epitope. NA if there is no WT Epitope Seq.</td>
+          </tr>
+          <tr>
+            <td style="font-size:120%">Median WT Score</td>
+            <td style="font-size:120%">Tumor DNA depth at this position. NA if VCF entry does not contain tumor DNA read count annotation.</td>
+          </tr>
+          <tr>
+            <td style="font-size:120%">Tumor DNA VAF</td>
+            <td style="font-size:120%">Tumor DNA variant allele frequency (VAF) at this position. NA if VCF entry does not contain tumor DNA read count annotation.</td>
+          </tr>
+          <tr>
+            <td style="font-size:120%">Median MT Score</td>
+            <td style="font-size:120%">Median ic50 binding affinity of the mutant epitope across all prediction algorithms used</td>
+          </tr>
+          <tr>
+            <td style="font-size:120%">Median Fold Change</td>
+            <td style="font-size:120%">Median WT IC50 Score / Median MT IC50 Score. NA if there is no WT Epitope Seq.</td>
+          </tr>
+          <tr>
+            <td style="font-size:120%">Median MT Percentile</td>
+            <td style="font-size:120%">Median binding affinity percentile rank of the mutant epitope across all prediction algorithms</td>
+          </tr>
+          <tr>
+            <td style="font-size:120%">Median WT Percentile</td>
+            <td style="font-size:120%">Median binding affinity percentile rank of the wildtype epitope across all prediction algorithms used (those that provide percentile output) NA if there is no WT Epitope Seq.</td>
+          </tr>
+            <td style="font-size:120%">NetMHC WT Score</td>
+            <td style="font-size:120%">ic50 binding affintity and percentile ranks for the WT Eptiope Seq by using NetMHC model</td>
+          </tr>
+          <tr>
+            <td style="font-size:120%">NetMHC MT Score</td>
+            <td style="font-size:120%">ic50 binding affintity and percentile ranks for the MT Eptiope Seq by using NetMHC model</td>
+          </tr>
+          <tr>
+            <td style="font-size:120%">NetMHC WT Percentile</td>
+            <td style="font-size:120%">Median binding affinity percentile rank of the wildtype epitope by using NetMHC model</td>
+          </tr>
+          <tr>
+            <td style="font-size:120%">NetMHC MT Percentile</td>
+            <td style="font-size:120%">Median binding affinity percentile rank of the mutant epitope by using NetMHC model</td>
+          </tr>
+          <tr>
+            <td style="font-size:120%">NetMHCpan WT Score</td>
+            <td style="font-size:120%">ic50 binding affintity and percentile ranks for the WT Eptiope Seq by using NetMHCpan model</td>
+          </tr>
+          <tr>
+            <td style="font-size:120%">NetMHCpan MT Score</td>
+            <td style="font-size:120%">ic50 binding affintity and percentile ranks for the MT Eptiope Seq by using NetMHCpan model</td>
+          </tr>
+          <tr>
+            <td style="font-size:120%">NetMHCpan WT Percentile</td>
+            <td style="font-size:120%">Median binding affinity percentile rank of the wildtype epitope by using NetMHCpan model</td>
+          </tr>
+          <tr>
+            <td style="font-size:120%">NetMHCpan MT Percentile</td>
+            <td style="font-size:120%">Median binding affinity percentile rank of the mutant epitope by using NetMHCpan model</td>
+          </tr>
+          <tr>
+            <td style="font-size:120%">Predicted Stability</td>
+            <td style="font-size:120%">Stability of the peptide-MHC-I complex</td>
+          </tr>
+          <tr>
+            <td style="font-size:120%">Half Life</td>
+            <td style="font-size:120%">Half-life of the peptide-MHC-I complex</td>
+          </tr>
+          <tr>
+            <td style="font-size:120%">Stability Rank</td>
+            <td style="font-size:120%">Stability of the peptide-MHC-I complex</td>
+          </tr>
+          <tr>
+            <td style="font-size:120%">NetMHCstab allele</td>
+            <td style="font-size:120%">Nearest neighbor to the HLA Allele. Used for NetMHCstab prediction</td>
+          </tr>
+          <tr>
+            <td style="font-size:120%">Binding affinity level</td>
+            <td style="font-size:120%">The binding affinity filter was applied to categorize peptides as “strong binding” if their ic50 values are below 50 nm, “intermediate binding” if between 50 nm and 250 nm, and “weak binding” if between 250 nm and 500 nm. Users can change the default numbers.</td>
+          </tr>
+          <tr>
+            <td style="font-size:120%">Name</td>
+            <td style="font-size:120%">Gene names that commonly have tumor mutations in COSMIC database</td>
+          </tr>
+          <tr>
+            <td style="font-size:120%">Somatic</td>
+            <td style="font-size:120%">Marked “yes” if it’s a gene commonly having somatic mutations</td>
+          </tr>
+          <tr>
+            <td style="font-size:120%">Germline</td>
+            <td style="font-size:120%">Marked “yes” if it’s a gene commonly having germline mutations</td>
+          </tr>
+          <tr>
+            <td style="font-size:120%">Tumour Types(Somatic)</td>
+            <td style="font-size:120%">Tumor types commonly having somatic mutations on this gene</td>
+          </tr>
+          <tr>
+            <td style="font-size:120%">Tumour Types(Germline)</td>
+            <td style="font-size:120%">Tumor types commonly having germline mutations on this gene</td>
+          </tr>
+          <tr>
+            <td style="font-size:120%">Role in Cancer</td>
+            <td style="font-size:120%">The genes’ roles in cancers</td>
+          </tr>
+        </tr>
+      </tbody>
+      </table>
+</div>
+      
+  
+  <div class="card-body" style="margin-top:3%;">
+    <p></p>
+  <h2 class="card-title" style="color: rgb(12, 114, 173)"><b>mTSA_and_aeTSA.tsv</b></h3>
+    <hr></hr>
+    <p style="font-size:120%"><b>This file is a summary report for mTSA, aeTSA, and TAA identification.</b></p>
+    <h3 class="card-title" style="color: rgb(124, 135, 151); margin-top:1%;">***Represent some files lack the following information, so they won't show these columns.</h3>
+    <p></p>
+    <table class="table table-striped table-condensed">
+      <thead>
+        <tr>
+          <th style="font-size:120%"><b>Column Name</b></th>
+          <th style="font-size:120%"><b>Description</b></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td style="font-size:120%">Transcript_info</td>
+          <td style="font-size:120%">A unique ID for the variant which includes some variant and transcript infomation</td>
+        </tr>
+        <tr>
+          <td style="font-size:120%">HLA Alleles (multiple)</td>
+          <td style="font-size:120%">For each HLA allele in the run, the number of this variant’s epitopes that bound well to the HLA allele (with median/lowest mutant binding affinity lower than the binding affinity threshold)</td>
+        </tr>
+        <tr>
+          <td style="font-size:120%">tpm_tumor</td>
+          <td style="font-size:120%">Transcripts Per Million in Tumor</td>
+        </tr>
+        <tr>
+          <td style="font-size:120%">tpm_normal</td>
+          <td style="font-size:120%">Transcripts Per Million in Normal</td>
+        </tr>
+        <tr>
+          <td style="font-size:120%">Best Peptide</td>
+          <td style="font-size:120%">The best-binding epitope sequence</td>
+        </tr>
+        <tr>
+          <td style="font-size:120%">Num Passing Peptides</td>
+          <td style="font-size:120%">The number of unique well-binding peptides for this mutation</td>
+        </tr>
+        <tr>
+          <td style="font-size:120%">IC50 MT</td>
+          <td style="font-size:120%">Median or lowest ic50 binding affinity of the best-binding mutant epitope across all prediction algorithms used</td>
+        </tr>
+        <tr>
+          <td style="font-size:120%; color: rgb(124, 135, 151)">***IC50 WT</td>
+          <td style="font-size:120%; color: rgb(124, 135, 151)">Median or lowest ic50 binding affinity of the best-binding wildtype epitope across all prediction algorithms used</td>
+        </tr>
+        <tr>
+          <td style="font-size:120%">%ile MT</td>
+          <td style="font-size:120%">Median or lowest binding affinity percentile rank of the best-binding mutant peptide across all prediction algorithms used (NetMHC or NetMHCpan)</td>
+        </tr> 
+        <tr>
+          <td style="font-size:120%; color: rgb(124, 135, 151)">***%ile WT</td>
+          <td style="font-size:120%; color: rgb(124, 135, 151)">Median or lowest binding affinity percentile rank of the best-binding wildtype peptide across all prediction algorithms used (NetMHC or NetMHCpan)</td>
+        </tr> 
+        <tr>
+          <td style="font-size:120%; color: rgb(124, 135, 151)">***Transcript</td>
+          <td style="font-size:120%; color: rgb(124, 135, 151)">The Ensembl ID of the affected transcript</td>
+        </tr> 
+        <tr>
+          <td style="font-size:120%; color: rgb(124, 135, 151)">***Ensembl Gene ID</td>
+          <td style="font-size:120%; color: rgb(124, 135, 151)">The Ensembl ID of the affected gene</td>
+        </tr> 
+        <tr>
+          <td style="font-size:120%; color: rgb(124, 135, 151)">***Predicted Stability</td>
+          <td style="font-size:120%; color: rgb(124, 135, 151)">Stability of the peptide-MHC-I complex</td>
+        </tr> 
+        <tr>
+          <td style="font-size:120%; color: rgb(124, 135, 151)">***Half Life</td>
+          <td style="font-size:120%; color: rgb(124, 135, 151)">Half-life of the peptide-MHC-I complex</td>
+        </tr> 
+        <tr>
+          <td style="font-size:120%; color: rgb(124, 135, 151)">***Stability Rank</td>
+          <td style="font-size:120%; color: rgb(124, 135, 151)">Stability of the peptide-MHC-I complex</td>
+        </tr> 
+        <tr>
+          <td style="font-size:120%">Binding affinity level</td>
+          <td style="font-size:120%">The binding affinity filter was applied to categorize peptides as “strong binding” if their ic50 values are below 50 nm, “intermediate binding” if between 50 nm and 250 nm, and “weak binding” if between 250 nm and 500 nm. Users can change the default numbers.</td>
+        </tr>        
+        </tbody>
+</table>
+</div>
+
+
+<div class="card-body" style="margin-top:3%;">
+  <p></p>
+<h2 class="card-title" style="color: rgb(12, 114, 173)"><b>aeTSA.tsv</b></h3>
+  <hr></hr>
+  <p style="font-size:120%"><b>This file is a summary report for aeTSA and TAA identification.</b></p>
+  <p></p>
+  <table class="table table-striped table-condensed">
+    <thead>
+      <tr>
+        <th style="font-size:120%"><b>Column Name</b></th>
+        <th style="font-size:120%"><b>Description</b></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td style="font-size:120%">Transcript_info</td>
+        <td style="font-size:120%">A unique ID for the variant which includes some variant and transcript infomation</td>
+      </tr>
+      <tr>
+        <td style="font-size:120%">HLA Alleles (multiple)</td>
+        <td style="font-size:120%">For each HLA allele in the run, the number of this variant’s epitopes that bound well to the HLA allele (with median/lowest mutant binding affinity lower than the binding affinity threshold)</td>
+      </tr>
+      <tr>
+        <td style="font-size:120%">Best Peptide</td>
+        <td style="font-size:120%">The best-binding epitope sequence</td>
+      </tr>
+      <tr>
+        <td style="font-size:120%">Num Passing Peptides</td>
+        <td style="font-size:120%">The number of unique well-binding peptides for this mutation</td>
+      </tr>
+      <tr>
+        <td style="font-size:120%">IC50 MT</td>
+        <td style="font-size:120%">Median or lowest ic50 binding affinity of the best-binding mutant epitope across all prediction algorithms used</td>
+      </tr>
+      <tr>
+        <td style="font-size:120%">%ile MT</td>
+        <td style="font-size:120%">Median or lowest binding affinity percentile rank of the best-binding mutant peptide across all prediction algorithms used (NetMHC or NetMHCpan)</td>
+      </tr> 
+      <tr>
+        <td style="font-size:120%">Binding affinity level</td>
+        <td style="font-size:120%">The binding affinity filter was applied to categorize peptides as “strong binding” if their ic50 values are below 50 nm, “intermediate binding” if between 50 nm and 250 nm, and “weak binding” if between 250 nm and 500 nm. Users can change the default numbers.</td>
+      </tr>    
+      <tr>
+        <td style="font-size:120%">Peptide</td>
+        <td style="font-size:120%">The epitope sequence aligned to the gene reference</td>
+      </tr>
+      <tr>
+        <td style="font-size:120%">cDNA sequence</td>
+        <td style="font-size:120%">The DNA sequence that has been reverse translated from a specific peptide</td>
+      </tr>
+      <tr>
+        <td style="font-size:120%">cDNA location</td>
+        <td style="font-size:120%">The specific position of the cDNA sequence</td>
+      </tr>  
+      <tr>
+        <td style="font-size:120%">Tumor read count</td>
+        <td style="font-size:120%">The number of tumor reads aligned with the peptide in a specific location</td>
+      </tr>
+      <tr>
+        <td style="font-size:120%">Total tumor read count</td>
+        <td style="font-size:120%">The sum of tumor read counts from all possible locations aligned with the peptide</td>
+      </tr>
+      <tr>
+        <td style="font-size:120%">Tumor average read depth</td>
+        <td style="font-size:120%">The average read depth of the cDNA sequence in the tumor sample (= total bases on the cDNA / assembled read length)</td>
+      </tr>
+      <tr>
+        <td style="font-size:120%">Normal read count</td>
+        <td style="font-size:120%">The number of normal reads aligned with the peptide in a specific location</td>
+      </tr> 
+      <tr>
+        <td style="font-size:120%">Normal read count</td>
+        <td style="font-size:120%">The sum of normal read counts from all possible locations aligned with the peptide</td>
+      </tr>
+      <tr>
+        <td style="font-size:120%">Normal average read depth</td>
+        <td style="font-size:120%">The average read depth of the cDNA sequence in the normal sample (= total bases on the cDNA / assembled read length)</td>
+      </tr>
+      <tr>
+        <td style="font-size:120%">Translated tumor peptide</td>
+        <td style="font-size:120%">The full peptide translated from the cDNA sequence</td>
+      </tr>
+      <tr>
+        <td style="font-size:120%">Average depth ratio</td>
+        <td style="font-size:120%">The ratio of tumor average read depth to normal average read depth</td>
+      </tr>
+      <tr>
+        <td style="font-size:120%">Sum of tumor and normal read count</td>
+        <td style="font-size:120%">The sum of tumor read counts and normal read counts in a specific location</td>
+      </tr>
+      <tr>
+        <td style="font-size:120%">Sum of total tumor and normal read count</td>
+        <td style="font-size:120%">The sum of tumor and normal read counts from all possible locations aligned with the peptide</td>
+      </tr>
+      <tr>
+        <td style="font-size:120%">Gene ID nad gene name</td>
+        <td style="font-size:120%">The ensembl gene ID and gene name</td>
+      </tr>
+      <tr>
+        <td style="font-size:120%">Gene element</td>
+        <td style="font-size:120%">Gene element of the region</td>
+      </tr>
+      <tr>
+        <td style="font-size:120%">Sum of expected read count</td>
+        <td style="font-size:120%">The sum of tumor total read counts and normal total read counts that are expected to aligned to a specific location</td>
+      </tr>
+      <tr>
+        <td style="font-size:120%">Element read proportion</td>
+        <td style="font-size:120%">The proportion of read counts in a specific element among all  ( = the sum of  read count in an element / the sum of total tumor and normal read count)</td>
+      </tr>
+      <tr>
+        <td style="font-size:120%">Putative neoantigen type</td>
+        <td style="font-size:120%">Possible neoantigen types, including aeTSA, TAA, and none based on different criteria</td>
+      </tr>
+      </tbody>
+</table>
+
+</div>
+</div>
+
+{% endblock content %}
+
+{% block script %}
+<script>
+function htmlDecode(input){
+  var e = document.createElement('textarea');
+  e.innerHTML = input;
+  // handle case of empty input
+  return e.childNodes.length === 0 ? "" : e.childNodes[0].nodeValue;
+}
+
+window.onload = function(){
+	encoded_mail_address = "&#100;&#48;&#48;&#57;&#52;&#53;&#48;&#48;&#54;&#64;&#110;&#116;&#117;&#46;&#101;&#100;&#117;&#46;&#116;&#119;";
+	document.getElementById("contact_email").href = "mailto:"+htmlDecode(encoded_mail_address);
+};
+</script>
+
+{% endblock script %}
