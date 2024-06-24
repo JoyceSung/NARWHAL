@@ -1,7 +1,7 @@
 # NARWHAL
 Below is the released source code for NARWHAL. This comprehensive online tool is designed to identify potential neoantigens. NARWHAL was developed to detect both mTSAs and aeTSAs utilizing multi-omics data. The link to NARWHAL is: [here](http://narwhal.cgm.ntu.edu.tw/). 
 
-<img width="3355" alt="image" src="https://github.com/JoyceSung/NARWHAL/blob/main/static/image/pipeline_new.png">
+<img width="3355" alt="image" src="https://github.com/JoyceSung/NARWHAL/blob/main/static/image/website_homepage.png">
 
 
 ![](header.png)
