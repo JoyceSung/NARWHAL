@@ -1,3 +1,0 @@
-git add LICENSE
-git commit -m "Add OSI-approved license"
-git push origin main
